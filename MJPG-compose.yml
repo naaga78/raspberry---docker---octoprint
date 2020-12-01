@@ -1,0 +1,11 @@
+version: '2.2'
+
+services:
+  mjpg-streamer:
+    restart: unless-stopped
+    image: openhorizon/mjpg-streamer-pi3
+    command: ./mjpg_streamer -o "output_http.so -w ./www" -i "input_uvc.so -r 1280x720 -d /dev/video0 -f 40"
+    devices:
+      - /dev/video0:/dev/video0
+    ports:
+      - 8080:8080
